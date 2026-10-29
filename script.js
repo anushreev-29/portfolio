@@ -2,31 +2,41 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ==========================================================================
      1. DARK MODE TOGGLE
      ========================================================================== */
-  const themeToggleBtn = document.getElementById("theme-toggle");
+  (function () {
+  const button = document.querySelector("#themeToggle");
 
-  // Check if user previously saved dark mode preference
-  const savedTheme = localStorage.getItem("portfolio-theme");
-
-  if (savedTheme === "dark") {
-    document.body.classList.add("dark-mode");
-    if (themeToggleBtn) themeToggleBtn.textContent = "☀️ Light";
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.add("dark");
+      if (button) button.textContent = "☀️";
+    } else {
+      document.body.classList.remove("dark");
+      if (button) button.textContent = "🌙";
+    }
   }
 
-  // Click event to toggle dark / light
-  if (themeToggleBtn) {
-    themeToggleBtn.addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-
-      if (document.body.classList.contains("dark-mode")) {
-        themeToggleBtn.textContent = "☀️ Light";
-        localStorage.setItem("portfolio-theme", "dark");
-      } else {
-        themeToggleBtn.textContent = "🌙 Dark";
-        localStorage.setItem("portfolio-theme", "light");
-      }
-    });
+  // Load the saved theme (if the browser allows storage)
+  let savedTheme = "light";
+  try {
+    savedTheme = localStorage.getItem("portfolio-theme") || "light";
+  } catch (error) {
+    savedTheme = "light";
   }
+  applyTheme(savedTheme);
 
+  if (!button) return;
+
+  button.addEventListener("click", () => {
+    const newTheme = document.body.classList.contains("dark") ? "light" : "dark";
+    applyTheme(newTheme);
+
+    try {
+      localStorage.setItem("portfolio-theme", newTheme);
+    } catch (error) {
+      // Storage blocked: the theme still changes for this visit
+    }
+  });
+})();
   /* ==========================================================================
      2. SMOOTH SCROLLING FOR NAVIGATION LINKS
      ========================================================================== */
