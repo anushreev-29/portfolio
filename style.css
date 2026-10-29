@@ -446,3 +446,102 @@ ul {
     text-align: center;
   }
 }
+/* ==========================================================================
+   BUTTON STYLES (HEADER TOGGLE & BACK TO TOP)
+   ========================================================================== */
+.theme-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.theme-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.05);
+}
+
+#back-to-top {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  background: var(--primary-gradient);
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+#back-to-top.show-btn {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#back-to-top:hover {
+  transform: translateY(-4px);
+}
+
+/* ==========================================================================
+   EXPLICIT DARK MODE OVERRIDES (Guaranteed to work)
+   ========================================================================== */
+body.dark-mode {
+  background-color: #0b1120;
+  color: #f8fafc;
+}
+
+/* Fix: Change hero background from bright white to dark slate */
+body.dark-mode .hero-section {
+  background: radial-gradient(circle at top, #1e293b 0%, #0b1120 70%);
+}
+
+/* Invert all cards and containers */
+body.dark-mode .skill-category,
+body.dark-mode .project-card,
+body.dark-mode .social-links a {
+  background-color: #1e293b;
+  border-color: #334155;
+  color: #f8fafc;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+}
+
+/* Headings in dark mode */
+body.dark-mode .hero-name,
+body.dark-mode .section-title,
+body.dark-mode .project-title,
+body.dark-mode strong {
+  color: #ffffff;
+}
+
+/* Secondary muted text */
+body.dark-mode .hero-tagline,
+body.dark-mode .hero-bio,
+body.dark-mode .about-content,
+body.dark-mode .project-desc,
+body.dark-mode .contact-content p,
+body.dark-mode .skill-list li {
+  color: #94a3b8;
+  border-color: #334155;
+}
+
+/* Project badges in dark mode */
+body.dark-mode .tag {
+  background-color: #312e81;
+  color: #c7d2fe;
+}
